@@ -33,10 +33,12 @@ lastRow([_ | Tail], H) :- lastRow(Tail, H).
 
 %find a box by using row number(I) and the proof in the row(Elem)
 %searches through lists to find a specific box where the element matches [I, Elem, _], and returning that entire box once it's found.
+getBox(_, [], _) :- not(true).
 getBox([I, Elem, _], [[[I, Elem, _] | BoxTail] | _], [[I, Elem, _] | BoxTail]).
 getBox([I, Elem, _], [ _ | Tail], ReturnBox) :- getBox([I, Elem, _], Tail, ReturnBox).
 
 %get the specific row using rowline I and the proof Elem
+getRow(_, [], _) :- not(true).
 getrow(I,[[I,Elem, _]|_],Elem).
 getrow(I, [_|Tail],CurrentRow) :- getrow(I,Tail,CurrentRow).
 
@@ -46,6 +48,7 @@ copyRow([I, Elem, Arg], [_ | Tail]) :- copyRow([I, Elem, Arg], Tail).
 
 
 %used for checking if the premise is valid
+validPremise([], _) :- not(true).
 validPremise(Elem, [Elem | _]).
 validPremise(Elem, [_ | Tail]) :- validPremise(Elem, Tail).
 
