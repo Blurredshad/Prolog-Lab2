@@ -43,6 +43,7 @@ getrow(I,[[I,Elem, _]|_],Elem).
 getrow(I, [_|Tail],CurrentRow) :- getrow(I,Tail,CurrentRow).
 
 %used in the copy rule
+%verify that first argument exist in 2nd argument
 copyRow([I, Elem, Arg], [[I, Elem, Arg] | _]).
 copyRow([I, Elem, Arg], [_ | Tail]) :- copyRow([I, Elem, Arg], Tail).
 
@@ -246,10 +247,10 @@ valid_proof(Prems,[[I, Elem, negnegel(X)] | RemainingRows],  TrackList) :-
 valid_proof(Prems,[[I, neg(Elem), mt(X,Y)] | RemainingRows],  TrackList) :-
 
                         %Checks if row X has an implication(A->B),
-                        getrow(X, TrackList, imp(Elem, InvalidValue)),
+                        getrow(X, TrackList, imp(Elem, Z)),
 
                         %if row Y has a neg(B).
-                        getrow(Y, TrackList, neg(InvalidValue)),
+                        getrow(Y, TrackList, neg(Z)),
 
                         valid_proof(Prems,   RemainingRows, [[I, neg(Elem), mt(X,Y)] |  TrackList]).
 
