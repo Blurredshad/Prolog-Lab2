@@ -1,0 +1,9 @@
+[p, imp(p,q)].
+
+q.
+
+[
+    [1, p, premise],
+    [2, imp(p,q), premise],
+    [3, q, impel(1,2)]
+].
